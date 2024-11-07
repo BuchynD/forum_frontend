@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import axios from "axios";
+import { RubricPage } from "./components/RubricPage";
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { RubricForm } from "./components/RubricForm";
 
 function App() {
+  const navElements = ["Rubric", "User", "Topic", "Message", "BadWord"];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <nav>
+          {navElements.map((el) => (
+            <Link to={`/${el.toLowerCase()}`}>{el} </Link>
+          ))}
+        </nav>
+        <Routes>
+          <Route path="/rubric" element={<RubricPage />} />
+          <Route path="/rubricform" element={<RubricForm />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
