@@ -1,13 +1,10 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { IRubric } from "../types";
+import { IEntity, IRubric } from "../types";
+import { EntityPageRow } from "./EntityPageRow";
 import Loading from "./Loading";
 import { RubricPageRow } from "./RubricPageRow";
-
-interface IEntity {
-  id: number;
-}
 
 interface EntityPageProps {
   entity: string;
@@ -52,14 +49,15 @@ export function EntityPage<T extends IEntity>({ entity }: EntityPageProps) {
         </tr>
       </thead>
       <tbody>
-        {/* {data.map((row) => (
-          <RubricPageRow
+        {data.map((row) => (
+          <EntityPageRow<T>
+            entity={entity}
             row={row}
             columns={columns}
             fetchData={fetchData}
             key={row.id}
           />
-        ))} */}
+        ))}
       </tbody>
       <tfoot>
         {!data.length && <Loading />}

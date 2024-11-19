@@ -2,13 +2,13 @@ import axios, { AxiosError } from "axios";
 import { stringify } from "querystring";
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { IRubric } from "../types";
+import { IBadWord, IRubric, IUser } from "../types";
 import { EntityFormProps, HTMLInputOrSelectElement } from "./EntityFormWrapper";
 import Error from "./Error";
 import { Success } from "./Success";
 
-export function RubricForm({ row, addOrEditRow }: EntityFormProps<IRubric>) {
-  const columns = ["name", "description"] as Extract<keyof IRubric, string>[];
+export function UserForm({ row, addOrEditRow }: EntityFormProps<IUser>) {
+  const columns = ["username", "email"] as Extract<keyof IUser, string>[];
 
   useEffect(() => {
     if (row) {
@@ -29,14 +29,14 @@ export function RubricForm({ row, addOrEditRow }: EntityFormProps<IRubric>) {
   return (
     <form>
       <p>
-        Name:
-        <input type="text" id="name" />
+        Username:
+        <input type="text" id="username" />
       </p>
       <p>
-        Description:
-        <input type="text" id="description" />
+        Email:
+        <input type="email" id="email" />
       </p>
-      <Link onClick={() => addOrEditRow(columns)} to={"/rubric"}>
+      <Link onClick={() => addOrEditRow(columns)} to={"/user"}>
         Add/Edit
       </Link>
     </form>
